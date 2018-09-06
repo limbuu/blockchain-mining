@@ -17,8 +17,9 @@ where all necessary prerequisites are already installed.
 On top of this jupyterhub, further oauthenticator, kubespawner, cull_idle are added with the modified static files and templates.  
 
 ## Oauthenticator 
-OAuth + JupyterHub Authenticator = OAuthenticator
-Jupyterhub supports numerous types of authentication services of which we use [Auth0 OAuthenticator]
+OAuth + JupyterHub Authenticator = OAuthenticator.
+
+Jupyterhub supports numerous types of authentication services of which we use [Auth0OAuthenticator]
 (https://github.com/jupyterhub/oauthenticator/blob/master/oauthenticator/auth0.py)
 
 Install with pip3, 
