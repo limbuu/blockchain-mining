@@ -11,10 +11,12 @@ and [Persistent Volume Claim(PVC)](https://kubernetes.io/docs/concepts/storage/p
 are used for storage in kubernetes. Using `Nfs server` codehub users data volumes are stored in GCE/GKE's
 persistent disks.  
 
+First, create NFS server with our requirements.
+
     kubectl apply -f nfs-pvc.yaml
     kubectl apply -f nfs-deployment-service.yaml
           
- Add the NFS server's service cluster IP in Persistent Volume server path and create PV and PVC for the codehub.  
+Add the NFS server's service cluster IP in Persistent Volume server path and create PV and PVC for the codehub.  
           
     kubectl get svc     
           
@@ -42,16 +44,16 @@ Helm has two parts: a client (helm) and a server (tiller).Tiller runs inside of 
     chmod +x get_helm.sh
     ./get_helm.sh
 
-Install Tiller with RBAC enabled, 
+Install Tiller with RBAC enabled.
 
-   kubectl create serviceaccount --namespace kube-system tiller
-   kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-   kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
-   helm init --service-account tiller --upgrade
+    kubectl create serviceaccount --namespace kube-system tiller
+    kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+    kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec"{"serviceAccount":"tiller"}}}}'      
+    helm init --service-account tiller --upgrade
    
-Install stable nginx-ingress with RBAC enabled,
+Install stable nginx-ingress with RBAC enabled.
 
-   helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true
+    helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true
 
 Now, apply ingress-resource that contains configuration nginx-ingress controller 
     
@@ -60,11 +62,22 @@ Now, apply ingress-resource that contains configuration nginx-ingress controller
 # SSL Cerficate
 To enable inbound traffic through HTTP and HTTPs, tls secret is used along with annotations.
 
-Create secret from the ssl-certificates 
+Create secret from the ssl-certificates. 
   
     kubectl create scecret tls tls-certificate --key <server>.key --cert <certificate>.crt 
  
-Add the secret with the host domain name to ingress-resource.yaml file. Also, add the annotation ingress.kubernetes.io/ssl-redirect: “true” to the ingress.yaml.
+Add the secret with the host domain name and the annotation ingress.kubernetes.io/ssl-redirect: “true” to the ingress.yaml.
 
     kubectl apply -f ingress-resource.yaml
  
+    
+ 
+  
+
+
+
+
+
+
+
+
