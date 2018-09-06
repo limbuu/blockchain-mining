@@ -1,6 +1,6 @@
 # Codehub/Jupyterhub
 
-Codehub is modified version of JupyterHub for simplified and scalable Machine Learning Development. 
+`Codehub` is modified version of JupyterHub for simplified and scalable Machine Learning Development. 
 With codehub you can create a multi-user Hub which spawns, manages, and proxies multiple instances of
 the single-user Jupyter notebook server. As, Codehub is build on top of the jupyterhub, numereous advanced 
 modifications are made on it.  
